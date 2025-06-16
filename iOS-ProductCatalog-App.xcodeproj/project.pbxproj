@@ -16,6 +16,8 @@
 		33A406772E005FBF000F4368 /* DetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A406762E005FBF000F4368 /* DetailsModel.swift */; };
 		33A406792E006042000F4368 /* AdvertisementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A406782E006042000F4368 /* AdvertisementCell.swift */; };
 		33A4067B2E006074000F4368 /* AdvertisementsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A4067A2E006074000F4368 /* AdvertisementsViewModel.swift */; };
+		33A4067D2E006393000F4368 /* AdvertisementCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A4067C2E006393000F4368 /* AdvertisementCellModel.swift */; };
+		33A4067F2E0063B6000F4368 /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A4067E2E0063B6000F4368 /* CustomImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		33A406762E005FBF000F4368 /* DetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsModel.swift; sourceTree = "<group>"; };
 		33A406782E006042000F4368 /* AdvertisementCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementCell.swift; sourceTree = "<group>"; };
 		33A4067A2E006074000F4368 /* AdvertisementsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementsViewModel.swift; sourceTree = "<group>"; };
+		33A4067C2E006393000F4368 /* AdvertisementCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementCellModel.swift; sourceTree = "<group>"; };
+		33A4067E2E0063B6000F4368 /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +73,8 @@
 				33A406602E005DCC000F4368 /* AdvertisementViewController.swift */,
 				33A406782E006042000F4368 /* AdvertisementCell.swift */,
 				33A4067A2E006074000F4368 /* AdvertisementsViewModel.swift */,
+				33A4067C2E006393000F4368 /* AdvertisementCellModel.swift */,
+				33A4067E2E0063B6000F4368 /* CustomImageView.swift */,
 			);
 			path = "iOS-ProductCatalog-App";
 			sourceTree = "<group>";
@@ -179,8 +185,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				33A406612E005DCC000F4368 /* AdvertisementViewController.swift in Sources */,
+				33A4067F2E0063B6000F4368 /* CustomImageView.swift in Sources */,
 				33A4065D2E005DCC000F4368 /* AppDelegate.swift in Sources */,
 				33A4067B2E006074000F4368 /* AdvertisementsViewModel.swift in Sources */,
+				33A4067D2E006393000F4368 /* AdvertisementCellModel.swift in Sources */,
 				33A4065F2E005DCC000F4368 /* SceneDelegate.swift in Sources */,
 				33A406792E006042000F4368 /* AdvertisementCell.swift in Sources */,
 				33A406772E005FBF000F4368 /* DetailsModel.swift in Sources */,

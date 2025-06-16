@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class AdvertisementViewController: UIViewController {
     
@@ -19,12 +20,17 @@ class AdvertisementViewController: UIViewController {
     private let minimumItemSpacing: CGFloat = 8
     private let itemsPerRow: CGFloat = 2
     
+    private let spinner = UIActivityIndicatorView(style: .large)
+    
     private let viewModel = AdvertisementsViewModel()
+    private var storage: Set<AnyCancellable> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         view.backgroundColor = .systemBackground
+        viewModel.fetchData()
+        setupSpinner()
+        binding()
     }
     
     private func setupCollectionView() {
@@ -44,11 +50,47 @@ class AdvertisementViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
     }
+    
+    private func setupSpinner() {
+        view.addSubview(spinner)
+        
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+        spinner.startAnimating()
+    }
+    
+    private func removeSpinner() {
+        spinner.removeFromSuperview()
+    }
+    
+    private func binding() {
+        viewModel.$state
+            .sink { [weak self] state in
+                switch state {
+                case .idle:
+                    self?.viewModel.fetchData()
+                case .loading:
+                    DispatchQueue.main.async {
+                        self?.setupSpinner()
+                    }
+                case .loaded:
+                    DispatchQueue.main.async {
+                        self?.collectionView.reloadData()
+                        self?.removeSpinner()
+                    }
+                case .failed:
+                    break
+                }
+            }
+            .store(in: &storage)
+    }
 }
 
 extension AdvertisementViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return viewModel.advertisementsData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -56,6 +98,12 @@ extension AdvertisementViewController: UICollectionViewDataSource {
                                                             for: indexPath) as? AdvertisementCell else {
             return UICollectionViewCell()
         }
+        let item = viewModel.advertisementsData[indexPath.row]
+        cell.configure(imageUrl: item.imageUrl,
+                       title: item.title,
+                       price: item.price,
+                       location: item.location,
+                       date: item.date)
         return cell
     }
 }
