@@ -9,22 +9,19 @@ import Foundation
 import Combine
 
 class AdvertisementsViewModel {
-    
-    enum LoadingState {
-        case idle
-        case loading
-        case failed
-        case loaded
-    }
-    
-    @Published var state: LoadingState = .idle
+    @Published var state: States.LoadingStates = .idle
     public var advertisementsData: [AdvertisementCellModel] = []
     private var storage: Set<AnyCancellable> = []
     
     public func fetchData() {
         state = .loading
         
-        URLSession.shared.dataTaskPublisher(for: URL(string: "https://www.avito.st/s/interns-ios/main-page.json")!)
+        guard let url = URL(string: Constants.stringURLs.getMainPageURL()) else {
+            state = .failed
+            return
+        }
+        
+        URLSession.shared.dataTaskPublisher(for: url)
             .map { $0.data }
             .decode(type: AdvertisementsModel.self, decoder: JSONDecoder())
             .replaceError(with: AdvertisementsModel(advertisements: []))
@@ -35,6 +32,7 @@ class AdvertisementsViewModel {
                 }
             }
             .replaceError(with: [])
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] model in
                 self?.advertisementsData = model
                 self?.state = .loaded

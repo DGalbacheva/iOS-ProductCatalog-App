@@ -72,14 +72,10 @@ class AdvertisementViewController: UIViewController {
                 case .idle:
                     self?.viewModel.fetchData()
                 case .loading:
-                    DispatchQueue.main.async {
-                        self?.setupSpinner()
-                    }
+                    self?.setupSpinner()
                 case .loaded:
-                    DispatchQueue.main.async {
-                        self?.collectionView.reloadData()
-                        self?.removeSpinner()
-                    }
+                    self?.collectionView.reloadData()
+                    self?.removeSpinner()
                 case .failed:
                     break
                 }
