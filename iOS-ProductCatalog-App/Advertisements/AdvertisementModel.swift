@@ -1,5 +1,5 @@
 //
-//  DetailsModel.swift
+//  AdvertisementModel.swift
 //  iOS-ProductCatalog-App
 //
 //  Created by Doroteya Galbacheva on 16.06.2025.
@@ -7,17 +7,13 @@
 
 import Foundation
 
-struct DetailsModel: Decodable {
+struct AdvertisementModel: Decodable {
     let id: String?
     let title: String?
     let price: String?
     let location: String?
     let imageUrl: String?
     let createdDate: String?
-    let description: String?
-    let email: String?
-    let phoneNumber: String?
-    let address: String?
     
     enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -26,10 +22,6 @@ struct DetailsModel: Decodable {
         case location = "location"
         case imageUrl = "imageUrl"
         case createdDate = "createdDate"
-        case description = "description"
-        case email = "email"
-        case phoneNumber = "phoneNumber"
-        case address = "address"
     }
     
     init(from decoder: Decoder) throws {
@@ -40,9 +32,5 @@ struct DetailsModel: Decodable {
         location = try values.decodeIfPresent(String.self, forKey: .location)
         imageUrl = try values.decodeIfPresent(String.self, forKey: .imageUrl)
         createdDate = try values.decodeIfPresent(String.self, forKey: .createdDate)
-        description = try values.decodeIfPresent(String.self, forKey: .description)
-        email = try values.decodeIfPresent(String.self, forKey: .email)
-        phoneNumber = try values.decodeIfPresent(String.self, forKey: .phoneNumber)
-        address = try values.decodeIfPresent(String.self, forKey: .address)
     }
 }
